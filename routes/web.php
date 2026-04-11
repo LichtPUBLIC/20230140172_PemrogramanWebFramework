@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AboutController;
+use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -21,6 +22,7 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware('auth')->group(function () {
     // Product Page
+    Route::get('/product/export', [ProductController::class, 'export'])->name('product.export');
     Route::get('/product', [ProductController::class, 'index'])->name('product.index');
     Route::post('/product', [ProductController::class, 'store'])->name('product.store');
     Route::get('/product/create', [ProductController::class, 'create'])->name('product.create');
