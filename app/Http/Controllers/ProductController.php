@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use App\Models\User;
+use App\Models\Category;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
 use Illuminate\Database\QueryException;
@@ -60,8 +61,9 @@ class ProductController extends Controller
         Gate::authorize('create', Product::class);
 
         $users = User::orderBy('name')->get();
+        $categories = Category::orderBy('name')->get();
 
-        return view('product.create', compact('users'));
+        return view('product.create', compact('users', 'categories'));
     }
 
     public function show($id)
@@ -110,8 +112,9 @@ class ProductController extends Controller
         Gate::authorize('update', $product);
 
         $users = User::orderBy('name')->get();
+        $categories = Category::orderBy('name')->get();
 
-        return view('product.edit', compact('product', 'users'));
+        return view('product.edit', compact('product', 'users', 'categories'));
     }
 
     public function delete($id)

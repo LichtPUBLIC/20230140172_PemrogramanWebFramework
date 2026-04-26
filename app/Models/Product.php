@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Product extends Model
 {
     use HasFactory;
-    protected $fillable = ['user_id', 'name', 'qty', 'price'];
+    protected $fillable = ['user_id', 'name', 'qty', 'price', 'category_id'];
 
     // Relasi: Product milik satu User
     public function user()
@@ -16,9 +16,9 @@ class Product extends Model
         return $this->belongsTo(User::class);
     }
 
-    // Relasi: Product punya banyak Kategori
-    public function kategoris()
+    // Relasi: Product milik satu Category
+    public function category()
     {
-        return $this->hasMany(Kategori::class);
+        return $this->belongsTo(Category::class);
     }
 }
